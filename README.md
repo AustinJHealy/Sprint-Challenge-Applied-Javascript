@@ -43,7 +43,7 @@ changes.
 
 4. Why would we convert a NodeList into an Array?
 
-Because certain array methods can not be used with a NodeList
+Because certain array methods can not be used with a NodeList.
 
 5. What is a component?
 
