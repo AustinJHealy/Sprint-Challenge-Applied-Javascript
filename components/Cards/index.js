@@ -20,8 +20,6 @@
 cardComponent = (cardData) => {
     
 
-        const cardsContainer = document.querySelector('.cards-container');
-
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card');
 
@@ -39,8 +37,8 @@ cardComponent = (cardData) => {
         const authorSpan = document.createElement('span');
 
         
-        cardsContainer.appendChild(headlineDiv);
-        cardsContainer.appendChild(authorDiv);
+        cardDiv.appendChild(headlineDiv);
+        cardDiv.appendChild(authorDiv);
         imgContainerDiv.appendChild(authorImage);
         authorDiv.appendChild(imgContainerDiv);
         authorDiv.appendChild(authorSpan);
@@ -56,21 +54,22 @@ cardComponent = (cardData) => {
        
       
 
-        return cardComponent;
+        return cardDiv;
     }
-     const card = document.querySelector('.cards-container');
+     
+
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 .then((response) => {
+console.log(response.data.articles);
+const dataArray = Object.values(response.data.articles);
 
-    const articles = Object.values(response.data.articles);
-    articles.forEach((data) => {
-        data.forEach((data) => {
-            cardComponent(data)
-            card.append(data)
-        })
-    })
-
+const cardsContainer = document.querySelector('.cards-container');
+for(let i=0; i< 4 ; i++){
+    for(let j=0; j< dataArray[j].length; j++){
+        cardsContainer.appendChild(cardComponent(dataArray[i][j]))
+}};
+   
 })
 .catch((err) => {
     console.log(err);
